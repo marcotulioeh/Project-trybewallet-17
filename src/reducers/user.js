@@ -1,14 +1,12 @@
-import { INSERT_EMAIL } from '../actions';
-
 const INITIAL_STATE = {
   email: '',
 };
 
-const user = (state = INITIAL_STATE, actions) => {
-  switch (actions.type) {
-  case INSERT_EMAIL:
+const user = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+  case 'INSERT_EMAIL':
     return {
-      email: actions.email,
+      email: action.email,
     };
   default:
     return state;

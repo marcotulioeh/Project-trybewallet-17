@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Input from '../components/Input';
-import { actionLogin } from '../actions';
+import { insertEmail } from '../actions';
 
 class Login extends React.Component {
   constructor(props) {
@@ -18,8 +18,8 @@ class Login extends React.Component {
 
   emailVerify = () => {
     const { email, password } = this.state;
-    const min = 6;
-    const ruleToEnable = (/[\w]+@+[\w]+.com/.test(email) && password.length < min);
+    const min = 5;
+    const ruleToEnable = !(/[\w]+@+[\w]+.com/.test(email) && password.length >= min);
     this.setState({ disabled: ruleToEnable });
   };
 
@@ -47,7 +47,7 @@ class Login extends React.Component {
           value={ email }
           placeholder="Email"
           onChange={ onChange }
-          data-testid="email-input"
+          dataTestId="email-input"
         />
         <Input
           type="password"
@@ -55,7 +55,7 @@ class Login extends React.Component {
           value={ password }
           placeholder="Senha"
           onChange={ onChange }
-          data-testid="password-input"
+          dataTestId="password-input"
         />
         <button type="submit" onClick={ onClick } disabled={ disabled }>
           Entrar
@@ -71,7 +71,7 @@ Login.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  login: (email) => dispatch(actionLogin(email)),
+  login: (email) => dispatch(insertEmail(email)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
