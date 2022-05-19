@@ -25,7 +25,6 @@ class Header extends React.Component {
           { email }
         </div>
         <div data-testid="total-field">
-          Despesas total: R$
           { parseFloat(resulTotal).toFixed(2) }
         </div>
         <div data-testid="header-currency-field">

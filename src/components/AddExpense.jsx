@@ -10,10 +10,10 @@ class AddExpense extends React.Component {
     super(props);
     this.state = {
       value: '',
-      coin: 'USD',
+      currency: 'USD',
       method: 'Dinheiro',
       description: '',
-      category: 'Lazer',
+      tag: 'Lazer',
     };
   }
 
@@ -25,15 +25,18 @@ class AddExpense extends React.Component {
     const { savePay } = this.props;
     e.preventDefault();
     savePay(addPay, this.state);
+    this.setState({
+      value: '',
+    });
   }
 
   render() {
-    const { value, coin, method, description, category } = this.state;
+    const { value, currency, method, description, tag } = this.state;
     const { onChange, handleChange } = this;
     const { currencies } = this.props;
 
     return (
-      <form onSubmit={ handleChange }>
+      <form>
         <Input
           label="Valor:"
           type="text"
@@ -45,7 +48,7 @@ class AddExpense extends React.Component {
           dataTestId="value-input"
         />
         <Coins
-          value={ coin }
+          value={ currency }
           onChange={ onChange }
           currencies={ currencies }
         />
@@ -62,12 +65,12 @@ class AddExpense extends React.Component {
             <option>Cartão de débito</option>
           </select>
         </label>
-        <label htmlFor="category">
+        <label htmlFor="tag">
           Categotia:
           <select
-            value={ category }
+            value={ tag }
             onChange={ onChange }
-            id="category"
+            id="tag"
             data-testid="tag-input"
           >
             <option>Alimentação</option>
@@ -86,6 +89,9 @@ class AddExpense extends React.Component {
           id="description"
           dataTestId="description-input"
         />
+        <button type="submit" onClick={ handleChange }>
+          Adicionar despesa
+        </button>
       </form>
     );
   }

@@ -2,7 +2,7 @@ export const insertEmail = (email) => ({ type: 'INSERT_EMAIL', email });
 
 export const currencies = (currency) => ({ type: 'CURRENCIES', currency });
 
-export const addPay = (resul, paymentInfo) => ({ type: 'ADD_PAY', paymentInfo, resul });
+export const addPay = (result, paymentInfo) => ({ type: 'ADD_PAY', paymentInfo, result });
 
 export const delePay = (id) => ({ type: 'DELETE_PAY', id });
 

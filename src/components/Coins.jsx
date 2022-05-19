@@ -6,9 +6,9 @@ class Coins extends React.Component {
     const { value, onChange, currencies } = this.props;
 
     return (
-      <label htmlFor="coin">
+      <label htmlFor="currency">
         Moeda:
-        <select value={ value } id="coin" onChange={ onChange }>
+        <select value={ value } id="currency" onChange={ onChange }>
           {currencies.map((currency, index) => (
             <option key={ index }>
               {currency}
