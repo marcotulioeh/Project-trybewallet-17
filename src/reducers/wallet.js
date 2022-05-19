@@ -8,7 +8,7 @@ const wallet = (state = INITIAL_STATE, action) => {
   case 'CURRENCIES':
     return {
       ...state,
-      // currencies: Object.keys(action.currencies),
+      currencies: Object.keys(action.currency),
     };
   case 'ADD_PAY':
     return {
