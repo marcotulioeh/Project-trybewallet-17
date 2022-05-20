@@ -4,23 +4,19 @@ import PropTypes from 'prop-types';
 import { deletPay } from '../actions';
 
 class TableExpense extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
   handleDelet = (target, datPay) => {
-    const { removed } = this.props;
-    if (target.name === 'delete') removed(datPay);
+    const { remove } = this.props;
+    if (target.name === 'delete') remove(datPay);
   };
 
   render() {
     const { hedleEdition, expenses } = this.props;
     const { handleDelet } = this;
     return (
-      <>
+      <table>
         <tr>
           <th>Descrição</th>
+          <th>Categoria</th>
           <th>Tag</th>
           <th>Método de pagamento</th>
           <th>Valor</th>
@@ -40,7 +36,7 @@ class TableExpense extends React.Component {
                 <td>{description}</td>
                 <td>{tag}</td>
                 <td>{method}</td>
-                <td>{value}</td>
+                <td>{Number(value).toFixed(2)}</td>
                 <td>{(exchangeRates[currency].name).split('/')[0]}</td>
                 <td>{Number(exchangeRates[currency].ask).toFixed(2)}</td>
                 <td>{Number(exchangeRates[currency].ask * value).toFixed(2)}</td>
@@ -68,7 +64,7 @@ class TableExpense extends React.Component {
           })}
         </div>
 
-      </>
+      </table>
     );
   }
 }
@@ -80,7 +76,7 @@ TableExpense.propTypes = {
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
-  removed: PropTypes.func,
+  remove: PropTypes.func,
 });
 
 const mapDispatchToProps = (dispatch) => ({ remove: (id) => dispatch(deletPay(id)) });
