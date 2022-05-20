@@ -42,7 +42,7 @@ class AddExpense extends React.Component {
           type="text"
           name="value"
           value={ value }
-          placeholder="0,00"
+          placeholder="0.00"
           onChange={ onChange }
           id="value"
           dataTestId="value-input"
