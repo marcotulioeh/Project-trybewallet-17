@@ -10,7 +10,7 @@ class TableExpense extends React.Component {
   };
 
   render() {
-    const { hedleEdition, expenses } = this.props;
+    const { expenses, handleEdition } = this.props;
     const { handleDelet } = this;
     return (
       <table>
@@ -45,7 +45,7 @@ class TableExpense extends React.Component {
                   <button
                     type="button"
                     name="edit"
-                    onClick={ () => hedleEdition(id) }
+                    onClick={ () => handleEdition(id) }
                     data-testid="edit-btn"
                   >
                     Editar
@@ -63,7 +63,6 @@ class TableExpense extends React.Component {
             );
           })}
         </div>
-
       </table>
     );
   }
@@ -71,7 +70,8 @@ class TableExpense extends React.Component {
 
 TableExpense.propTypes = {
   expenses: PropTypes.arrayOf(PropTypes.object),
-  hedleEdition: PropTypes.func,
+  remove: PropTypes.string,
+  handleEdition: PropTypes.func,
 }.isRequired;
 
 const mapStateToProps = (state) => ({

@@ -4,9 +4,9 @@ export const currencies = (currency) => ({ type: 'CURRENCIES', currency });
 
 export const addPay = (result, paymentInfo) => ({ type: 'ADD_PAY', paymentInfo, result });
 
-export const deletPay = (id) => ({ type: 'DELETE_PAY', id });
-
 export const editPay = (paymentState) => ({ type: 'EDIT_PAY', paymentState });
+
+export const deletPay = (id) => ({ type: 'DELETE_PAY', id });
 
 export const awsomeFetch = (action, paymentInfo) => async (dispatch) => {
   const endpoit = 'https://economia.awesomeapi.com.br/json/all';

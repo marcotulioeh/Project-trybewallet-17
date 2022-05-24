@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Input from './Input';
-import { awsomeFetch, addPay } from '../actions';
 import Coins from './Coins';
+import Input from './Input';
+import { editPay } from '../actions';
 
-class AddExpense extends React.Component {
+class EditExpense extends Component {
   constructor(props) {
     super(props);
+
+    const { id, expenses } = this.props;
+    const thisPayment = expenses.find((expense) => expense.id === id);
+    const { value, description, currency, method, tag } = thisPayment;
+
     this.state = {
-      value: '',
-      currency: 'USD',
-      method: 'Dinheiro',
-      description: '',
-      tag: 'Lazer',
+      value,
+      description,
+      tag,
+      method,
+      currency,
+      id,
     };
     console.log(this.state);
   }
@@ -22,20 +28,25 @@ class AddExpense extends React.Component {
     this.setState({ [id]: value });
   }
 
-  handleChange = (e) => {
-    const { savePay } = this.props;
-    e.preventDefault();
-    savePay(addPay, this.state);
-    console.log(addPay);
-    this.setState({
-      value: '',
-    });
+  handleClick = () => {
+    const { edit, onSubmit, expenses } = this.props;
+    const { id } = this.state;
+    const filtered = expenses.find((payment) => payment.id === id);
+    edit({ ...this.state, exchangeRates: filtered.exchangeRates });
+    onSubmit();
   }
 
   render() {
-    const { value, currency, method, description, tag } = this.state;
-    const { onChange, handleChange } = this;
+    const {
+      value,
+      description,
+      currency,
+      tag,
+      method,
+    } = this.state;
+
     const { currencies } = this.props;
+    const { handleClick, onChange } = this;
 
     return (
       <form>
@@ -91,24 +102,25 @@ class AddExpense extends React.Component {
           id="description"
           dataTestId="description-input"
         />
-        <button type="submit" onClick={ handleChange }>
-          Adicionar despesa
+        <button type="button" onClick={ handleClick }>
+          Editar despesa
         </button>
       </form>
     );
   }
 }
 
-AddExpense.propTypes = {
-  addPay: PropTypes.func,
+EditExpense.propTypes = {
   currencies: PropTypes.arrayOf(PropTypes.string),
 }.isRequired;
 
 const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
   expenses: state.wallet.expenses,
-  currencies: state.wallet.currencies });
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  savePay: (action, state) => dispatch(awsomeFetch(action, state)) });
+  edit: (payment) => dispatch(editPay(payment)),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddExpense);
+export default connect(mapStateToProps, mapDispatchToProps)(EditExpense);

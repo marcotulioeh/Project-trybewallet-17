@@ -8,7 +8,12 @@ class Coins extends React.Component {
     return (
       <label htmlFor="currency">
         Moeda:
-        <select value={ value } id="currency" onChange={ onChange }>
+        <select
+          value={ value }
+          onChange={ onChange }
+          id="currency"
+          data-testid="currency-input"
+        >
           {currencies.map((currency, index) => (
             <option key={ index }>
               {currency}

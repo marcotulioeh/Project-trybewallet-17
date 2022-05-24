@@ -1,15 +1,13 @@
 import React from 'react';
 import Header from '../components/Header';
-import AddExpense from '../components/AddExpense';
-import TableExpense from '../components/TableExpense';
+import ResultExpense from '../components/ResultExpense';
 
 class Wallet extends React.Component {
   render() {
     return (
       <>
         <Header />
-        <AddExpense />
-        <TableExpense />
+        <ResultExpense />
       </>
     );
   }
