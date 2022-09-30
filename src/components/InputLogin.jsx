@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import { InputStyle } from '../Style';
 
-class Input extends React.Component {
+class InputLogin extends React.Component {
   render() {
     const {
       label,
@@ -15,26 +15,23 @@ class Input extends React.Component {
       id,
     } = this.props;
     return (
-      <div>
-        <label htmlFor={ name }>
-          { label }
-          <input
-            type={ type }
-            name={ name }
-            value={ value }
-            placeholder={ placeholder }
-            onChange={ onChange }
-            id={ id }
-            data-testid={ dataTestId }
-          />
-        </label>
-      </div>
-
+      <label htmlFor={ name }>
+        { label }
+        <InputStyle
+          type={ type }
+          name={ name }
+          value={ value }
+          placeholder={ placeholder }
+          onChange={ onChange }
+          id={ id }
+          data-testid={ dataTestId }
+        />
+      </label>
     );
   }
 }
 
-Input.propTypes = {
+InputLogin.propTypes = {
   label: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
@@ -45,4 +42,4 @@ Input.propTypes = {
   id: PropTypes.string,
 }.isRequired;
 
-export default Input;
+export default InputLogin;
